@@ -49,4 +49,31 @@ $curl = curl_init();
 curl_setopt_array($curl, $options);
 curl_exec($curl);
 curl_close($curl);
+
+
+} elseif ($message_text == "ロリ") {
+
+$headers = array('Content-Type: application/json',
+                 'Authorization: Bearer ' . $access_token);
+
+// ここから
+$message1 = array('type' => 'text',
+                 'text' => "お前が作れ");
+
+$body = json_encode(array('replyToken' => $reply_token,
+                          'messages'   => array($message1)));
+
+// ここまでをいじって好きな機能を作ろう！
+
+// post json with curl
+$options = array(CURLOPT_URL            => $url,
+                 CURLOPT_CUSTOMREQUEST  => 'POST',
+                 CURLOPT_RETURNTRANSFER => true,
+                 CURLOPT_HTTPHEADER     => $headers,
+                 CURLOPT_POSTFIELDS     => $body);
+
+$curl = curl_init();
+curl_setopt_array($curl, $options);
+curl_exec($curl);
+curl_close($curl);
 };
