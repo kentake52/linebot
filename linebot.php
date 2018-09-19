@@ -16,7 +16,7 @@ $message_text = $event['message']['text'];	//メッセージ内容
 // 現在時刻取得
 $now = date("Y/m/d H:i");
 
-$random = rand(0, 450);
+$random = rand(0, 480);
 
 if($message_text == "百合"){	// メッセージ内容が「百合」なら以下を実行
 
