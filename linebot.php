@@ -17,6 +17,7 @@ $message_text = $event['message']['text'];	//メッセージ内容
 $now = date("Y/m/d H:i");
 
 $random = rand(0, 480);
+$random2 = rand(0, 45);
 
 if($message_text == "百合"){	// メッセージ内容が「百合」なら以下を実行
 
@@ -76,4 +77,105 @@ $curl = curl_init();
 curl_setopt_array($curl, $options);
 curl_exec($curl);
 curl_close($curl);
+
+
+} elseif ($message_text == "玉井") {
+
+$headers = array('Content-Type: application/json',
+                 'Authorization: Bearer ' . $access_token);
+
+$message1 = array('type' => 'image',
+                 'originalContentUrl' => 'https://kenserver.wjg.jp/image/tamai/' . $random2 . '.jpg',
+                 'previewImageUrl'    => 'https://kenserver.wjg.jp/image/tamai/' . $random2 . '.jpg');
+
+$body = json_encode(array('replyToken' => $reply_token,
+                          'messages'   => array($message1)));
+
+
+$options = array(CURLOPT_URL            => $url,
+                 CURLOPT_CUSTOMREQUEST  => 'POST',
+                 CURLOPT_RETURNTRANSFER => true,
+                 CURLOPT_HTTPHEADER     => $headers,
+                 CURLOPT_POSTFIELDS     => $body);
+
+$curl = curl_init();
+curl_setopt_array($curl, $options);
+curl_exec($curl);
+curl_close($curl);
+
+
+
+} elseif ($message_text == "ゆうと") {
+
+$headers = array('Content-Type: application/json',
+                 'Authorization: Bearer ' . $access_token);
+
+$message1 = array('type' => 'image',
+                 'originalContentUrl' => 'https://kenserver.wjg.jp/image/yuto/' . $random2 . '.jpg',
+                 'previewImageUrl'    => 'https://kenserver.wjg.jp/image/yuto/' . $random2 . '.jpg');
+
+$body = json_encode(array('replyToken' => $reply_token,
+                          'messages'   => array($message1)));
+
+
+$options = array(CURLOPT_URL            => $url,
+                 CURLOPT_CUSTOMREQUEST  => 'POST',
+                 CURLOPT_RETURNTRANSFER => true,
+                 CURLOPT_HTTPHEADER     => $headers,
+                 CURLOPT_POSTFIELDS     => $body);
+
+$curl = curl_init();
+curl_setopt_array($curl, $options);
+curl_exec($curl);
+curl_close($curl);
+
+
+} elseif ($message_text == "百合画像") {
+
+$headers = array('Content-Type: application/json',
+                 'Authorization: Bearer ' . $access_token);
+
+$message1 = array('type' => 'image',
+                 'originalContentUrl' => 'https://kenserver.wjg.jp/image/yuri/' . $random . '.jpg',
+                 'previewImageUrl'    => 'https://kenserver.wjg.jp/image/yuri/' . $random . '.jpg');
+
+$body = json_encode(array('replyToken' => $reply_token,
+                          'messages'   => array($message1)));
+
+
+$options = array(CURLOPT_URL            => $url,
+                 CURLOPT_CUSTOMREQUEST  => 'POST',
+                 CURLOPT_RETURNTRANSFER => true,
+                 CURLOPT_HTTPHEADER     => $headers,
+                 CURLOPT_POSTFIELDS     => $body);
+
+$curl = curl_init();
+curl_setopt_array($curl, $options);
+curl_exec($curl);
+curl_close($curl);
+
+
+} elseif ($message_text == "機能") {
+
+$headers = array('Content-Type: application/json',
+                 'Authorization: Bearer ' . $access_token);
+
+$message1 = array('type' => 'text',
+                 'text' => "百合" . "\n" . "百合画像" . "\n" . "ロリ" . "\n" . "玉井" . "\n" . "ゆうと");
+
+$body = json_encode(array('replyToken' => $reply_token,
+                          'messages'   => array($message1)));
+
+
+$options = array(CURLOPT_URL            => $url,
+                 CURLOPT_CUSTOMREQUEST  => 'POST',
+                 CURLOPT_RETURNTRANSFER => true,
+                 CURLOPT_HTTPHEADER     => $headers,
+                 CURLOPT_POSTFIELDS     => $body);
+
+$curl = curl_init();
+curl_setopt_array($curl, $options);
+curl_exec($curl);
+curl_close($curl);
+
 };
