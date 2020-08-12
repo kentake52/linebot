@@ -16,10 +16,14 @@ $message_text = $event['message']['text'];	//メッセージ内容
 // 現在時刻取得
 $now = date("Y/m/d H:i");
 
-$random = rand(0, 480);
-$random2 = rand(0, 45);
+// ↓百合画像の最大数 画像を追加した時はこの値だけ変えればOK
+$yurimax = 1088;
 
-if($message_text == "百合"){	// メッセージ内容が「百合」なら以下を実行
+
+$random = rand(1, $yurimax);
+$random2 = rand(1, 45);
+
+if($message_text == "百合" || $message_text == "yuri"){	// メッセージ内容が「百合」なら以下を実行
 
 // build request headers
 $headers = array('Content-Type: application/json',
@@ -33,7 +37,9 @@ $message1 = array('type' => 'text',
 $message2 = array('type' => 'image',
                  'originalContentUrl' => 'https://kenserver.wjg.jp/image/yuri/' . $random . '.jpg',
                  'previewImageUrl'    => 'https://kenserver.wjg.jp/image/yuri/' . $random . '.jpg');
-
+/* $message3 = array('type' => 'text',
+                 'text' => "おい展以外使ってなくね？？もっとおまえら使えよおい！！！！！！！！");
+*/
 $body = json_encode(array('replyToken' => $reply_token,
                           'messages'   => array($message1,$message2)));
 
@@ -175,8 +181,34 @@ curl_setopt_array($curl, $options);
 curl_exec($curl);
 curl_close($curl);
 
+
+} else if (1 <= $message_text && $message_text <= $yurimax) {
+
+$headers = array('Content-Type: application/json',
+                 'Authorization: Bearer ' . $access_token);
+
+$message1 = array('type' => 'image',
+                 'originalContentUrl' => 'https://kenserver.wjg.jp/image/yuri/' . $message_text . '.jpg',
+                 'previewImageUrl'    => 'https://kenserver.wjg.jp/image/yuri/' . $message_text . '.jpg');
+
+$body = json_encode(array('replyToken' => $reply_token,
+                          'messages'   => array($message1)));
+
+
+$options = array(CURLOPT_URL            => $url,
+                 CURLOPT_CUSTOMREQUEST  => 'POST',
+                 CURLOPT_RETURNTRANSFER => true,
+                 CURLOPT_HTTPHEADER     => $headers,
+                 CURLOPT_POSTFIELDS     => $body);
+
+$curl = curl_init();
+curl_setopt_array($curl, $options);
+curl_exec($curl);
+curl_close($curl);
+
+
 };
 
-$random = rand(0, 480);		//バグ対策？？
+$random = rand(1, $yurimax);		//バグ対策？？
 
 ?>
